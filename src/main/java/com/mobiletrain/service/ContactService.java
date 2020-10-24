@@ -18,6 +18,7 @@ public interface ContactService {
     int queryPageCount(int pageSize);
 
     // 根据id删除通讯录
+//
     // 返回值是是否删除成功
     boolean deleteById(String contactId);
 
