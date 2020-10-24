@@ -1,9 +1,11 @@
 package com.mobiletrain.web;
 
+import com.mobiletrain.dao.ContactDAO;
 import com.mobiletrain.domain.Contact;
 import com.mobiletrain.service.ContactService;
 import com.mobiletrain.service.impl.ContactServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +18,10 @@ import java.util.Map;
 @WebServlet("/update")
 public class UpdateServlet extends HttpServlet {
     private ContactService service = new ContactServiceImpl();
-
+    public void init(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        this.service = (ContactService) context.getBean("contactDAO", ContactDAO.class);
+    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1. 接收数据
         Contact contact = new Contact();

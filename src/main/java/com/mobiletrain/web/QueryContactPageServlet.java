@@ -1,8 +1,10 @@
 package com.mobiletrain.web;
 
+import com.mobiletrain.dao.ContactDAO;
 import com.mobiletrain.domain.Contact;
 import com.mobiletrain.service.ContactService;
 import com.mobiletrain.service.impl.ContactServiceImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +17,10 @@ import java.util.List;
 @WebServlet("/query_contact_page")
 public class QueryContactPageServlet extends HttpServlet {
     private ContactService service = new ContactServiceImpl();
-
+    public void init(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        this.service = (ContactService) context.getBean("contactDAO", ContactDAO.class);
+    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // 1. 接收数据
