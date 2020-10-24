@@ -14,6 +14,7 @@ public interface ContactService {
     List<Contact> queryAll(int currentPage, int pageSize);
 
     // 根据一页几条，查询总页数
+//
     int queryPageCount(int pageSize);
 
     // 根据id删除通讯录
